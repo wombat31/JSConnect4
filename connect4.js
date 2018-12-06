@@ -3,15 +3,15 @@ var myGameGrid;
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new component(480, 270, "black", 0, 0);
-    myGameGrid = new framePiece(100,100,100,100,50,0,0,"red");
+    myGameBackground = new component(700, 550, "black", 0, 0);
+    myGameGrid = new framePiece(50,50,50,50,25,0,0,"blue");
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = 700;
+        this.canvas.height = 550;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     }
@@ -34,11 +34,11 @@ function framePiece(width, height, x, y, radius, startAngle, endAngle,color){
     this.y = y;
     ctx= myGameArea.context;
     ctx.beginPath();
-    ctx.moveTo(50,100);
-    ctx.lineTo(0,100);
+    ctx.moveTo(width/2,height);
+    ctx.lineTo(0,height);
     ctx.lineTo(0,0);
-    ctx.lineTo(100,0);
-    ctx.arc(100,100,50,3*Math.PI/2, Math.PI,true);
+    ctx.lineTo(width,0);
+    ctx.arc(width,height,radius,3*Math.PI/2, Math.PI,true);
     ctx.closePath()
     ctx.fillStyle = color;
     ctx.fill();
