@@ -1,14 +1,21 @@
 var myGamePiece;
 var myGameGrid;
 
+
 function startGame() {
     myGameArea.start();
+    /*Background is the base layer*/
     myGameBackground = new component(700, 600, "black", 0, 0);
+    /*Draw a game piece*/
+    myGameCounter = new counter(50,50,"yellow");
+    /*Draw the fram over the piece*/
     for (var i = 0; i <= 600; i += 100){
         for (var j = 0; j <= 500; j += 100){
             myGameGridLT = new framePieceLT(50,50,50,50,25,0,0,"blue",i,j);
-            myGameGridRT = new framePieceRT(50,50,0,50,25,0,0,"red",i,j);
-            myGameGridLB = new framePieceLB(50,50,50,0,25,0,0,"green",i,j);
+            myGameGridRT = new framePieceRT(50,50,0,50,25,0,0,"blue",i,j);
+            myGameGridLB = new framePieceLB(50,50,50,0,25,0,0,"blue",i,j);
+            myGameGridRB = new framePieceRB(50,50,0,0,25,0,0,"blue",i,j);
+
         }
     }
 }
@@ -31,6 +38,18 @@ function component(width, height, color, x, y,type,radius) {
     ctx = myGameArea.context;
     ctx.fillStyle = color;
     ctx.fillRect(this.x, this.y, this.width, this.height);
+}
+
+function counter(x,y,color){
+    this.x = x;
+    this.y = y;
+    ctx= myGameArea.context;
+    ctx.beginPath();
+    ctx.arc(x,y,50,0,2*Math.PI,true);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    
 }
 
 function framePieceLT(width, height, x, y, radius, startAngle, endAngle,color,xPos,yPos){
@@ -85,6 +104,26 @@ function framePieceLB(width, height, x, y, radius, startAngle, endAngle,color,xP
     ctx.lineTo(xPos,yPos+height);
     ctx.lineTo(xPos + width/2,yPos+height);
     ctx.arc(xPos + width,yPos+height,radius,Math.PI, Math.PI/2,true);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.strokeStyle = color;
+    ctx.stroke();
+}
+
+function framePieceRB(width, height, x, y, radius, startAngle, endAngle,color,xPos,yPos){
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    ctx= myGameArea.context;
+    ctx.beginPath();
+    ctx.moveTo(xPos+(width*1.5),yPos+height);
+    ctx.lineTo(xPos+(width*2),yPos+height);
+    ctx.lineTo(xPos+(width*2),yPos+(2*height));
+    ctx.lineTo(xPos+width,yPos+(height*2));
+    ctx.lineTo(xPos + width,yPos+(height*1.5));
+    ctx.arc(xPos + width,yPos+height,radius,Math.PI/2, 0,true);
     ctx.closePath();
     ctx.fillStyle = color;
     ctx.fill();
