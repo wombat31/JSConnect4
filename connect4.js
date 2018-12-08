@@ -1,8 +1,12 @@
 var myGamePiece;
 var myGameGrid;
+var MouseX = 0;
+var mouseY = 0;
+
 
 
 function startGame() {
+    
     myGameArea.start();
     /*Background is the base layer*/
     myGameBackground = new component(700, 600, "black", 0, 0);
@@ -18,6 +22,7 @@ function startGame() {
 
         }
     }
+    
 }
 
 var myGameArea = {
@@ -27,6 +32,7 @@ var myGameArea = {
         this.canvas.height = 600;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        
     }
 }
 
